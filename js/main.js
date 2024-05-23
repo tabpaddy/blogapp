@@ -18,3 +18,28 @@ const closeNav = () =>{
 
 openNavBtn.addEventListener('click', openNav);
 closeNavBtn.addEventListener('click', closeNav);
+
+
+
+const sidebar = document.querySelector('aside');
+const showSideBarBtn = document.querySelector('#show__sidebar-btn');
+const hideSideBarBtn = document.querySelector('#hide__sidebar-btn');
+
+// show side 
+const openSide = ()=>{
+    sidebar.style.left = '0';
+    showSideBarBtn.style.display = 'none';
+    hideSideBarBtn.style.display = 'inline-block';
+}
+
+// hide side
+const closeSide = ()=>{
+    sidebar.style.left= '-100%';
+    showSideBarBtn.style.display = 'inline-block';
+    hideSideBarBtn.style.display = 'none';
+}
+
+
+showSideBarBtn.addEventListener('click', openSide);
+hideSideBarBtn.addEventListener('click', closeSide);
+
