@@ -53,6 +53,11 @@ body{
     margin-inline: auto;
 }
 
+/* add to post on index if there no feautred post */
+.section__extra-margin{
+    margin-top: 7rem;
+}
+
 section {
     margin-top: 3rem;
     width: 100vw;
@@ -434,6 +439,11 @@ footer ul a:hover{
 .alert__message.success{
     background: var(--color-green-light);
     color: var(--color-green);
+}
+
+/* centers text of alert  */
+.alert__message.lg{
+    text-align: center;
 }
 
 form{
