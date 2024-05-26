@@ -11,7 +11,7 @@ include('./partials/header.php');
                 <li><a href="add-post.php"><i class="uil uil-pen"></i>
                 <h5>Add Post</h5>
                 </a></li>
-                <li><a href="dashboard.php"  class="active"><i class="uil uil-postcard"></i>
+                <li><a href="index.php"><i class="uil uil-postcard"></i>
                 <h5>Manage Post</h5>
                 </a></li>
                 <li><a href="add-user.php"><i class="uil uil-user-plus"></i>
@@ -23,41 +23,37 @@ include('./partials/header.php');
                 <li><a href="add-category.php"><i class="uil uil-edit"></i>
                 <h5>Add Category</h5>
                 </a></li>
-                <li><a href="manage-category.php" ><i class="uil uil-list-ul"></i>
+                <li><a href="manage-category.php" class="active"><i class="uil uil-list-ul"></i>
                 <h5>Manage Category</h5>
                 </a></li>
             </ul>
         </aside>
 
         <main>
-            <h2>Manage Users</h2>
+            <h2>Manage Categories</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Title</th>
-                        <th>Category</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Lorem ipsum dolor sit amet.</td>
                         <td>Travel</td>
-                        <td><a href="edit-user.php" class="btn sm">Edit</a></td>
-                        <td><a href="Delete-user.php" class="btn sm danger">Delete</a></td>
+                        <td><a href="edit-category.php" class="btn sm">Edit</a></td>
+                        <td><a href="Delete-category.php" class="btn sm danger">Delete</a></td>
                     </tr>
                     <tr>
-                        <td>Lorem ipsum dolor sit amet.</td>
-                        <td>food</td>
-                        <td><a href="edit-user.php" class="btn sm">Edit</a></td>
-                        <td><a href="Delete-user.php" class="btn sm danger">Delete</a></td>
+                        <td>Travel</td>
+                        <td><a href="edit-category.php" class="btn sm">Edit</a></td>
+                        <td><a href="Delete-category.php" class="btn sm danger">Delete</a></td>
                     </tr>
                     <tr>
-                        <td>Lorem ipsum dolor sit amet.</td>
-                        <td>Music</td>
-                        <td><a href="edit-user.php" class="btn sm">Edit</a></td>
-                        <td><a href="Delete-user.php" class="btn sm danger">Delete</a></td>
+                        <td>Travel</td>
+                        <td><a href="edit-category.php" class="btn sm">Edit</a></td>
+                        <td><a href="Delete-category.php" class="btn sm danger">Delete</a></td>
                     </tr>
                 </tbody>
             </table>

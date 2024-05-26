@@ -11,13 +11,13 @@ include('./partials/header.php');
                 <li><a href="add-post.php"><i class="uil uil-pen"></i>
                 <h5>Add Post</h5>
                 </a></li>
-                <li><a href="dashboard.php"  class="active"><i class="uil uil-postcard"></i>
+                <li><a href="index.php"><i class="uil uil-postcard"></i>
                 <h5>Manage Post</h5>
                 </a></li>
                 <li><a href="add-user.php"><i class="uil uil-user-plus"></i>
                 <h5>Add User</h5>
                 </a></li>
-                <li><a href="manage-user.php"><i class="uil uil-users-alt"></i>
+                <li><a href="manage-user.php" class="active"><i class="uil uil-users-alt"></i>
                 <h5>Manage User</h5>
                 </a></li>
                 <li><a href="add-category.php"><i class="uil uil-edit"></i>
@@ -34,30 +34,27 @@ include('./partials/header.php');
             <table>
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Category</th>
+                        <th>Name</th>
+                        <th>Username</th>
                         <th>Edit</th>
                         <th>Delete</th>
+                        <th>Admin</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Lorem ipsum dolor sit amet.</td>
-                        <td>Travel</td>
+                        <td>ernest achieve</td>
+                        <td>achieve</td>
                         <td><a href="edit-user.php" class="btn sm">Edit</a></td>
                         <td><a href="Delete-user.php" class="btn sm danger">Delete</a></td>
+                        <td>Yes</td>
                     </tr>
                     <tr>
-                        <td>Lorem ipsum dolor sit amet.</td>
-                        <td>food</td>
+                        <td>kingsley achieve</td>
+                        <td>kingsley</td>
                         <td><a href="edit-user.php" class="btn sm">Edit</a></td>
                         <td><a href="Delete-user.php" class="btn sm danger">Delete</a></td>
-                    </tr>
-                    <tr>
-                        <td>Lorem ipsum dolor sit amet.</td>
-                        <td>Music</td>
-                        <td><a href="edit-user.php" class="btn sm">Edit</a></td>
-                        <td><a href="Delete-user.php" class="btn sm danger">Delete</a></td>
+                        <td>No</td>
                     </tr>
                 </tbody>
             </table>
