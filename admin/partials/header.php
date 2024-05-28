@@ -1,5 +1,18 @@
 <?php
 include ('config/database.php');
+
+// check login status
+if(!isset($_SESSION['user-id'])){
+    header('location: ' . ROOT_URL . 'signing.php');
+    die();
+}else{
+        $id = filter_var($_SESSION['user-id'], FILTER_SANITIZE_NUMBER_INT);
+    $query = "SELECT avatar FROM users WHERE user_id=$id";
+    $result = mysqli_query($con, $query);
+    $avatar = mysqli_fetch_assoc($result);
+}
+
+
 ?>
 <!DOCTYPE html>
 
@@ -27,16 +40,19 @@ include ('config/database.php');
                 <li><a href="<?=ROOT_URL?>about.php">About</a></li>
                 <li><a href="<?=ROOT_URL?>service.php">Service</a></li>
                 <li><a href="<?=ROOT_URL?>contact.php">Contact</a></li>
-                <!-- <li><a href="<?=ROOT_URL?>signin.php">Signin</a></li> -->
+                <?php if(isset($_SESSION['user-id'])):?>
                 <li class="nav__profile">
                     <div class="avatar">
-                        <img src="./images/avatar1.jpg" alt="proflie_img">
+                        <img src="<?= ROOT_URL .'image/' . $avatar['avatar'] ?>" alt="proflie_img">
                     </div>
                     <ul>
                         <li><a href="<?=ROOT_URL?>index.php">Dashboard</a></li>
-                        <li><a href="logout.php">Logout</a></li>
+                        <li><a href="<?=ROOT_URL?>logout.php">Logout</a></li>
                     </ul>
                 </li>
+                <?php else : ?>
+                <li><a href="<?=ROOT_URL?>signing.php">Signin</a></li>  
+                <?php endif ?> 
             </ul>
 
             <button id="open_nav_btn"><i class="uil uil-bars"></i></button>
