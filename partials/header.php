@@ -1,5 +1,13 @@
 <?php
 include ('config/database.php');
+
+//fetch current user from database
+if(isset($_SESSION['user-id'])){
+    $id = filter_var($_SESSION['user-id'], FILTER_SANITIZE_NUMBER_INT);
+    $query = "SELECT avatar FROM users WHERE user_id=$id";
+    $result = mysqli_query($con, $query);
+    $avatar = mysqli_fetch_assoc($result);
+}
 ?>
 <!DOCTYPE html>
 
@@ -9,7 +17,7 @@ include ('config/database.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Website</title>
     <!-- custom css -->
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="<?=ROOT_URL?>css/style.css">
     <!-- icon scout -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
     <!-- google fonts -->
@@ -23,21 +31,23 @@ include ('config/database.php');
         <div class="container nav__container">
             <a href="<?=ROOT_URL?>index.php" class="nav__logo">PRAISE</a>
             <ul class="nav__items">
-                <li><a href="blog.php">Blog</a></li>
-                <!-- <li><a href="<?=ROOT_URL?>blog.php">Blogs</a></li> -->
+                <li><a href="<?=ROOT_URL?>blog.php">Blog</a></li>
                 <li><a href="<?=ROOT_URL?>about.php">About</a></li>
                 <li><a href="<?=ROOT_URL?>service.php">Service</a></li>
                 <li><a href="<?=ROOT_URL?>contact.php">Contact</a></li>
-                <li><a href="<?=ROOT_URL?>signing.php">Sign In</a></li>
-                <!-- <li class="nav__profile">
+                <?php if(isset($_SESSION['user-id'])):?>
+                <li class="nav__profile">
                     <div class="avatar">
-                        <img src="./images/avatar1.jpg" alt="proflie_img">
+                        <img src="<?= ROOT_URL .'image/' . $avatar['avatar'] ?>" alt="proflie_img">
                     </div>
                     <ul>
                         <li><a href="<?=ROOT_URL?>admin/index.php">Dashboard</a></li>
                         <li><a href="<?=ROOT_URL?>logout.php">Logout</a></li>
                     </ul>
-                </li> -->
+                </li>
+                <?php else : ?>
+                <li><a href="<?=ROOT_URL?>signing.php">Signin</a></li>  
+                <?php endif ?> 
             </ul>
 
             <button id="open_nav_btn"><i class="uil uil-bars"></i></button>
