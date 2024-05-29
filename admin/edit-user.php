@@ -1,5 +1,14 @@
 <?php
 include('./partials/header.php');
+
+if(isset($_GET['id'])){
+    $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+    $query = "SELECT * FROM users WHERE user_id=$id";
+    $result = mysqli_query($con, $query);
+    $user = mysqli_fetch_assoc($result);
+}else{
+    header('location: '. ROOT_URL . 'admin/manage-user.php');
+}
 ?>
 
     
@@ -7,22 +16,15 @@ include('./partials/header.php');
     <div class="container form__selection-container">
         <h2>Edits User</h2>
         
-        <form action="" enctype="multipart/form-data">
-            <input type="text" name="" id="" placeholder="First Name" required>
-            <input type="text" name="" id="" placeholder="Last Name" required>
-            
-            <input type="email" name="" id="" placeholder="Email" required>
-            <input type="password" name="" id="" placeholder="Create Password" required>
-            <input type="password" name="" id="" placeholder="Confirm Password" required>
-            <select name="" id="">
+        <form action="<?= ROOT_URL ?>admin/edit-user-logic.php" method="post">
+            <input type="hidden" value="<?=$user['user_id']?>" name="user_id">
+            <input type="text" name="firstname" id="" placeholder="First Name" value="<?=$user['firstname']?>">
+            <input type="text" name="lastname" id="" placeholder="Last Name" value="<?=$user['lastname']?>">     
+            <select name="userrole" id="">
                 <option value="0">Author</option>
                 <option value="1">Admin</option>
             </select>
-            <div class="form__control">
-                <label for="avatar">User Avatar</label>
-                <input type="file" id="avatar">
-            </div>
-            <button type="submit" class="btn">Update User</button>
+            <button type="submit" class="btn" name="submit">Update User</button>
         </form>
     </div>
 </section>
