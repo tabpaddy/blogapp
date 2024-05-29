@@ -1,19 +1,58 @@
 <?php
+// session_start();
 include('./partials/header.php');
 
 // fetch users from database but not current user
 $current_admin_id = $_SESSION['user-id'];
 
-$query = "SELECT * FROM users WHERE NOT id=$current_admin_id";
+$query = "SELECT * FROM users WHERE NOT user_id=$current_admin_id";
+$users = mysqli_query($con, $query);
 ?>
 
 <section class="dashboard">
-<?php if(isset($_SESSION['add-user-success'])): ?>
+
+<?php if(isset($_SESSION['add-user-success'])): // show if add user was successful?>
             <div class="alert__message success container">
                 <p>
                     <?= 
                     $_SESSION['add-user-success'];
                     unset($_SESSION['add-user-success']);
+                    ?>
+                </p>
+        </div>
+<?php elseif(isset($_SESSION['edit-user-success'])): // show if edit user was successful?>
+            <div class="alert__message success container">
+                <p>
+                    <?= 
+                    $_SESSION['edit-user-success'];
+                    unset($_SESSION['edit-user-success']);
+                    ?>
+                </p>
+        </div>
+<?php elseif(isset($_SESSION['edit-user'])): // show if edit user was not successful?>
+            <div class="alert__message error container">
+                <p>
+                    <?= 
+                    $_SESSION['edit-user'];
+                    unset($_SESSION['edit-user']);
+                    ?>
+                </p>
+        </div>
+<?php elseif(isset($_SESSION['delete-user-success'])): // show if delete user was successful?>
+            <div class="alert__message success container">
+                <p>
+                    <?= 
+                    $_SESSION['delete-user-success'];
+                    unset($_SESSION['delete-user-success']);
+                    ?>
+                </p>
+        </div>
+<?php elseif(isset($_SESSION['delete-user'])): // show if edit user was not successful?>
+            <div class="alert__message error container">
+                <p>
+                    <?= 
+                    $_SESSION['delete-user'];
+                    unset($_SESSION['delete-user']);
                     ?>
                 </p>
         </div>
@@ -48,6 +87,7 @@ $query = "SELECT * FROM users WHERE NOT id=$current_admin_id";
 
         <main>
             <h2>Manage Users</h2>
+            <?php if(mysqli_num_rows($users) > 0) : ?>
             <table>
                 <thead>
                     <tr>
@@ -59,22 +99,24 @@ $query = "SELECT * FROM users WHERE NOT id=$current_admin_id";
                     </tr>
                 </thead>
                 <tbody>
+                    <?php while($user = mysqli_fetch_assoc($users)) : ?>
                     <tr>
-                        <td>ernest achieve</td>
-                        <td>achieve</td>
-                        <td><a href="edit-user.php" class="btn sm">Edit</a></td>
-                        <td><a href="Delete-user.php" class="btn sm danger">Delete</a></td>
-                        <td>Yes</td>
+                        <td><?= "{$user['firstname']} {$user['lastname']}" ?></td>
+                        <td><?= $user['username']?></td>
+                        <td><a href="<?= ROOT_URL ?>admin/edit-user.php?id=<?= $user['user_id']?>" class="btn sm">Edit</a></td>
+                        <td><a href="<?= ROOT_URL ?>admin/Delete-user.php?id=<?= $user['user_id']?>" class="btn sm danger">Delete</a></td>
+                        <td><?php if($user['is_admin']){
+                            echo "Yes";
+                        }else{
+                            echo "No";
+                        } ?></td>
                     </tr>
-                    <tr>
-                        <td>kingsley achieve</td>
-                        <td>kingsley</td>
-                        <td><a href="edit-user.php" class="btn sm">Edit</a></td>
-                        <td><a href="Delete-user.php" class="btn sm danger">Delete</a></td>
-                        <td>No</td>
-                    </tr>
+                    <?php endwhile ?>
                 </tbody>
             </table>
+            <?php else : ?>
+                <div class="alert__message error"><?= "NO users found" ?></div>
+            <?php endif ?>
         </main>
     </div>
 </section>
